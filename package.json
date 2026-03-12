@@ -1,0 +1,17 @@
+{
+  "name": "microgreen-grow-chamber",
+  "version": "0.1.0",
+  "description": "Pre-order website for the Smart Microgreen Grow Chamber",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "format": "prettier --write \"**/*.{html,css,js,json,md}\"",
+    "deploy": "vite build && gh-pages -d dist"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0",
+    "prettier": "^3.5.0",
+    "vite": "^6.2.0"
+  }
+}

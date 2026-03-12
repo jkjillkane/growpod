@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GrowPod - Smart Microgreen Grow Chamber</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="#hero" class="logo">
+                <span class="logo-icon">&#127793;</span> GrowPod
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#sustainability">Sustainability</a></li>
+                <li><a href="#compare">Compare</a></li>
+                <li><a href="#specs">Tech Specs</a></li>
+                <li><a href="#preorder" class="btn btn-nav">Pre-Order</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <span class="hero-badge">Now accepting pre-orders</span>
+                <h1>Grow Fresh Microgreens.<br><span class="text-gradient">Fully Automated.</span></h1>
+                <p class="hero-subtitle">
+                    A smart indoor grow chamber that controls temperature, humidity, CO&#8322;,
+                    watering, and lighting &mdash; so you don't have to. Fresh greens in 7&ndash;14 days
+                    with 90% less water.
+                </p>
+                <div class="hero-cta">
+                    <a href="#preorder" class="btn btn-primary btn-lg">Pre-Order Now</a>
+                    <a href="#how-it-works" class="btn btn-outline btn-lg">See How It Works</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-value">7&ndash;14</span>
+                        <span class="stat-label">Days to harvest</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">90%</span>
+                        <span class="stat-label">Less water</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">~12%</span>
+                        <span class="stat-label">Lower CO&#8322;</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-image-placeholder">
+                    <div class="placeholder-icon">&#127807;</div>
+                    <p>Product Image Coming Soon</p>
+                </div>
+            </div>
+        </div>
+        <div class="hero-wave">
+            <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+                <path d="M0,64 C360,120 720,0 1440,64 L1440,120 L0,120 Z" fill="#ffffff"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem" id="problem">
+        <div class="container">
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">&#128666;</div>
+                    <h3>80% Imported</h3>
+                    <p>Ireland imports approximately 80% of its fruit and vegetables, increasing carbon emissions and food miles.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">&#127961;</div>
+                    <h3>No Space</h3>
+                    <p>Urban dwellers and apartment residents lack the outdoor space for traditional growing methods.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">&#9200;</div>
+                    <h3>No Time</h3>
+                    <p>Busy lifestyles leave little room for the daily attention traditional gardening demands.</p>
+                </div>
+                <div class="problem-card highlight">
+                    <div class="problem-icon">&#127793;</div>
+                    <h3>The Solution</h3>
+                    <p>A fully automated, compact indoor grow chamber that handles everything &mdash; just add seeds and water.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">How It Works</span>
+                <h2>Smart Growing, <span class="text-gradient">Simplified</span></h2>
+                <p>Our ESP32-powered system automates every aspect of microgreen cultivation using precision sensors and intelligent control.</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h3>Plant Your Seeds</h3>
+                        <p>Place microgreen seeds on the hydroponic growing medium inside the chamber. No soil needed.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h3>Set &amp; Forget</h3>
+                        <p>The ESP32 microcontroller takes over &mdash; managing grow lights, watering schedules, temperature, and humidity automatically.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h3>Monitor Remotely</h3>
+                        <p>Real-time sensor data lets you check on CO&#8322; levels, moisture, and climate conditions from anywhere.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">04</div>
+                    <div class="step-content">
+                        <h3>Harvest Fresh</h3>
+                        <p>In just 7&ndash;14 days, harvest nutrient-dense microgreens straight from your countertop.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Architecture -->
+            <div class="architecture">
+                <h3>System Architecture</h3>
+                <div class="arch-diagram">
+                    <div class="arch-center">
+                        <div class="arch-core">ESP32<br>Controller</div>
+                    </div>
+                    <div class="arch-nodes">
+                        <div class="arch-node" data-position="top-left">
+                            <span class="arch-node-icon">&#127777;</span>
+                            <span>Temperature &amp; Humidity</span>
+                        </div>
+                        <div class="arch-node" data-position="top-right">
+                            <span class="arch-node-icon">&#128167;</span>
+                            <span>Soil Moisture<br>(SEN0193)</span>
+                        </div>
+                        <div class="arch-node" data-position="bottom-left">
+                            <span class="arch-node-icon">&#128168;</span>
+                            <span>CO&#8322; &amp; Air Quality<br>(ENS160)</span>
+                        </div>
+                        <div class="arch-node" data-position="bottom-right">
+                            <span class="arch-node-icon">&#128161;</span>
+                            <span>Grow Lights<br>&amp; Pumps</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Features</span>
+                <h2>Everything Your Greens <span class="text-gradient">Need</span></h2>
+                <p>Precision-engineered components working together for optimal growing conditions.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">&#128161;</div>
+                    <h3>Scheduled Grow Lights</h3>
+                    <p>Automated lighting cycles optimised for microgreen growth phases. Full-spectrum LEDs ensure rapid, healthy development.</p>
+                    <ul class="feature-specs">
+                        <li>Programmable light schedules</li>
+                        <li>Full-spectrum LED</li>
+                        <li>Low power consumption</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128167;</div>
+                    <h3>Smart Irrigation</h3>
+                    <p>Capacitive soil moisture sensor (SEN0193) monitors growing medium moisture in real-time, triggering peristaltic pumps only when needed.</p>
+                    <ul class="feature-specs">
+                        <li>Capacitive sensing (corrosion-resistant)</li>
+                        <li>3.3&ndash;5.5V operating range</li>
+                        <li>Automatic pump control</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#127777;</div>
+                    <h3>Climate Control</h3>
+                    <p>Automated temperature and humidity management maintains the perfect microclimate for consistent growth.</p>
+                    <ul class="feature-specs">
+                        <li>Temperature regulation</li>
+                        <li>Humidity management</li>
+                        <li>Closed-loop control</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128168;</div>
+                    <h3>CO&#8322; Monitoring</h3>
+                    <p>The ENS160 air quality sensor provides precise CO&#8322; and VOC readings, ensuring optimal growing air conditions.</p>
+                    <ul class="feature-specs">
+                        <li>ENS160 digital sensor</li>
+                        <li>CO&#8322; + VOC monitoring</li>
+                        <li>Real-time data logging</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128225;</div>
+                    <h3>Hydroponic System</h3>
+                    <p>No soil required. Our hydroponic approach uses 90% less water while delivering nutrients directly to plant roots.</p>
+                    <ul class="feature-specs">
+                        <li>Soilless growing</li>
+                        <li>90% water savings</li>
+                        <li>Faster growth cycles</li>
+                    </ul>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">&#128187;</div>
+                    <h3>ESP32 Brain</h3>
+                    <p>The ESP32 microcontroller orchestrates all sensors and actuators, with WiFi connectivity for remote monitoring.</p>
+                    <ul class="feature-specs">
+                        <li>WiFi enabled</li>
+                        <li>Open-source firmware</li>
+                        <li>OTA updates</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sustainability -->
+    <section class="sustainability" id="sustainability">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Sustainability</span>
+                <h2>Better for You, <span class="text-gradient">Better for the Planet</span></h2>
+                <p>Growing locally eliminates food miles, reduces packaging waste, and cuts carbon emissions.</p>
+            </div>
+            <div class="sustainability-content">
+                <div class="carbon-compare">
+                    <h3>Carbon Footprint Comparison</h3>
+                    <p class="compare-subtitle">kg CO&#8322;e per kg of greens eaten</p>
+                    <div class="bar-chart">
+                        <div class="bar-row">
+                            <div class="bar-label">Imported Produce</div>
+                            <div class="bar-track">
+                                <div class="bar-fill imported" data-value="5.2">
+                                    <span class="bar-value">5.2 kg CO&#8322;e</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bar-row">
+                            <div class="bar-label">GrowPod Chamber</div>
+                            <div class="bar-track">
+                                <div class="bar-fill growpod" data-value="4.6">
+                                    <span class="bar-value">4.6 kg CO&#8322;e</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="compare-note">*Including waste reduction benefits. Based on lifecycle analysis data.</p>
+                </div>
+                <div class="sustainability-points">
+                    <div class="sus-point">
+                        <div class="sus-icon">&#128167;</div>
+                        <div>
+                            <h4>90% Less Water</h4>
+                            <p>Hydroponic growing uses a fraction of the water required by traditional soil farming.</p>
+                        </div>
+                    </div>
+                    <div class="sus-point">
+                        <div class="sus-icon">&#128230;</div>
+                        <div>
+                            <h4>Zero Packaging</h4>
+                            <p>No plastic clamshells, no shipping boxes. Harvest directly from chamber to plate.</p>
+                        </div>
+                    </div>
+                    <div class="sus-point">
+                        <div class="sus-icon">&#128664;</div>
+                        <div>
+                            <h4>Zero Food Miles</h4>
+                            <p>Eliminate transport emissions entirely by growing at home. No imports needed.</p>
+                        </div>
+                    </div>
+                    <div class="sus-point">
+                        <div class="sus-icon">&#129388;</div>
+                        <div>
+                            <h4>Less Food Waste</h4>
+                            <p>Harvest only what you need, when you need it. No more wilted greens in the fridge.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Comparison -->
+    <section class="compare" id="compare">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Compare</span>
+                <h2>Why Choose <span class="text-gradient">GrowPod?</span></h2>
+                <p>See how we stack up against existing products on the market.</p>
+            </div>
+            <div class="compare-table-wrapper">
+                <table class="compare-table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Automation</th>
+                            <th>Climate Control</th>
+                            <th>CO&#8322; Monitoring</th>
+                            <th>Smart Irrigation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Yooca Max</strong></td>
+                            <td>&euro;19</td>
+                            <td class="no">&#10007;</td>
+                            <td class="no">&#10007;</td>
+                            <td class="no">&#10007;</td>
+                            <td class="no">&#10007;</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Golumup</strong></td>
+                            <td>&euro;44</td>
+                            <td class="partial">Partial</td>
+                            <td class="no">&#10007;</td>
+                            <td class="no">&#10007;</td>
+                            <td class="no">&#10007;</td>
+                        </tr>
+                        <tr>
+                            <td><strong>AeroGarden</strong></td>
+                            <td>&euro;130&ndash;180</td>
+                            <td class="yes">&#10003;</td>
+                            <td class="no">&#10007;</td>
+                            <td class="no">&#10007;</td>
+                            <td class="partial">Basic</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Urban Cultivator</strong></td>
+                            <td>&euro;1,000+</td>
+                            <td class="yes">&#10003;</td>
+                            <td class="yes">&#10003;</td>
+                            <td class="no">&#10007;</td>
+                            <td class="yes">&#10003;</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td><strong>GrowPod</strong></td>
+                            <td><strong>Pre-Order</strong></td>
+                            <td class="yes">&#10003;</td>
+                            <td class="yes">&#10003;</td>
+                            <td class="yes">&#10003;</td>
+                            <td class="yes">&#10003;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="use-cases" id="use-cases">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Use Cases</span>
+                <h2>Who Is It <span class="text-gradient">For?</span></h2>
+            </div>
+            <div class="use-cases-grid">
+                <div class="use-case-card">
+                    <div class="use-case-icon">&#127968;</div>
+                    <h3>Home Growers</h3>
+                    <p>Perfect for apartments and urban homes. Grow fresh microgreens year-round on your countertop with zero gardening experience needed.</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">&#127860;</div>
+                    <h3>Restaurants &amp; Chefs</h3>
+                    <p>Ultra-fresh garnishes and ingredients on demand. Reduce supplier dependency and ensure consistent quality for your dishes.</p>
+                </div>
+                <div class="use-case-card">
+                    <div class="use-case-icon">&#127979;</div>
+                    <h3>Schools &amp; STEM</h3>
+                    <p>A hands-on teaching tool for biology, environmental science, and IoT engineering. Open-source hardware makes it ideal for education.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Specs -->
+    <section class="specs" id="specs">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Open Hardware</span>
+                <h2>Technical <span class="text-gradient">Specifications</span></h2>
+                <p>Transparent, open-source design. Here's exactly what's inside.</p>
+            </div>
+            <div class="specs-content">
+                <div class="specs-table-wrapper">
+                    <h3>Bill of Materials</h3>
+                    <table class="specs-table">
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Details</th>
+                                <th>Est. Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Microcontroller</td>
+                                <td>ESP32 Dev Board &mdash; WiFi + Bluetooth</td>
+                                <td>&euro;5.32</td>
+                            </tr>
+                            <tr>
+                                <td>Soil Moisture Sensor</td>
+                                <td>SEN0193 Capacitive &mdash; 3.3&ndash;5.5V, corrosion-resistant</td>
+                                <td>&euro;3.65</td>
+                            </tr>
+                            <tr>
+                                <td>Air Quality Sensor</td>
+                                <td>ENS160 &mdash; CO&#8322; &amp; VOC digital sensor</td>
+                                <td>&euro;5.62</td>
+                            </tr>
+                            <tr>
+                                <td>Water Pump</td>
+                                <td>Peristaltic pump &mdash; precise liquid dosing</td>
+                                <td>&euro;4.60</td>
+                            </tr>
+                            <tr>
+                                <td>Grow Lights</td>
+                                <td>Full-spectrum LED array</td>
+                                <td>&euro;38.93</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="sensor-detail">
+                    <h3>Moisture Sensor: SEN0193</h3>
+                    <div class="sensor-specs">
+                        <div class="sensor-spec">
+                            <span class="spec-label">Operating Voltage</span>
+                            <span class="spec-value">3.3 &ndash; 5.5 VDC</span>
+                        </div>
+                        <div class="sensor-spec">
+                            <span class="spec-label">Output Voltage</span>
+                            <span class="spec-value">0 &ndash; 3.0 VDC</span>
+                        </div>
+                        <div class="sensor-spec">
+                            <span class="spec-label">Current Draw</span>
+                            <span class="spec-value">5 mA</span>
+                        </div>
+                        <div class="sensor-spec">
+                            <span class="spec-label">Interface</span>
+                            <span class="spec-value">PH2.0-3P (Gravity)</span>
+                        </div>
+                        <div class="sensor-spec">
+                            <span class="spec-label">Dimensions</span>
+                            <span class="spec-value">98 &times; 23 mm</span>
+                        </div>
+                        <div class="sensor-spec">
+                            <span class="spec-label">Sensing Type</span>
+                            <span class="spec-value">Capacitive (non-corrosive)</span>
+                        </div>
+                    </div>
+                    <p class="sensor-note">Capacitive sensing provides longer lifespan than resistive alternatives. The sensor outputs an analog voltage inversely proportional to moisture level, calibrated in three zones: Dry, Wet, and Water.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pre-Order Section -->
+    <section class="preorder" id="preorder">
+        <div class="container">
+            <div class="preorder-card">
+                <div class="preorder-content">
+                    <span class="section-tag">Limited Pre-Orders</span>
+                    <h2>Be First to Grow</h2>
+                    <p>Join the waitlist for early access to the GrowPod Smart Microgreen Chamber. Pre-order customers receive priority pricing and exclusive updates.</p>
+                    <form class="preorder-form" id="preorderForm">
+                        <div class="form-row">
+                            <input type="text" name="name" placeholder="Your name" required>
+                            <input type="email" name="email" placeholder="Your email" required>
+                        </div>
+                        <div class="form-row">
+                            <select name="interest">
+                                <option value="" disabled selected>I'm interested as...</option>
+                                <option value="home">Home Grower</option>
+                                <option value="restaurant">Restaurant / Chef</option>
+                                <option value="school">School / Educator</option>
+                                <option value="farm">Vertical Farm</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg btn-full">Join the Waitlist</button>
+                        <p class="form-note">No payment required. We'll notify you when pre-orders open.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#hero" class="logo"><span class="logo-icon">&#127793;</span> GrowPod</a>
+                    <p>Smart indoor growing, fully automated. Designed and engineered in Ireland.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#specs">Tech Specs</a></li>
+                        <li><a href="#preorder">Pre-Order</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="#sustainability">Sustainability</a></li>
+                        <li><a href="#compare">Comparison</a></li>
+                        <li><a href="#use-cases">Use Cases</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Open Source</h4>
+                    <ul>
+                        <li><a href="#specs">Bill of Materials</a></li>
+                        <li><a href="#specs">Sensor Specs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 GrowPod. All rights reserved. Designed in Ireland.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
