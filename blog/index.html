@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - GrowPod</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="blog-page">
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">&#127793;</span> GrowPod
+            </a>
+            <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                <span></span><span></span><span></span>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="../index.html#features">Features</a></li>
+                <li><a href="../index.html#sustainability">Sustainability</a></li>
+                <li><a href="./">Blog</a></li>
+                <li><a href="../index.html#preorder" class="btn btn-nav">Pre-Order</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Blog Header -->
+    <section class="blog-header">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Blog</span>
+                <h1>GrowPod <span class="text-gradient">Journal</span></h1>
+                <p>Tips, updates, and stories about smart indoor growing.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Content -->
+    <section class="blog-content">
+        <div class="container">
+            <!-- Post grid (listing view) -->
+            <div class="blog-grid" id="blogGrid">
+                <!-- Posts loaded dynamically -->
+            </div>
+
+            <!-- Empty state -->
+            <div class="blog-empty" id="blogEmpty" style="display: none;">
+                <div class="blog-empty-icon">&#128221;</div>
+                <h3>No posts yet</h3>
+                <p>Check back soon for growing tips, product updates, and more.</p>
+            </div>
+
+            <!-- Single post view -->
+            <div class="blog-post-view" id="blogPostView" style="display: none;">
+                <button class="blog-back-btn" id="blogBackBtn">
+                    &larr; Back to all posts
+                </button>
+                <article class="blog-post-full" id="blogPostFull">
+                    <!-- Full post rendered here -->
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo"><span class="logo-icon">&#127793;</span> GrowPod</a>
+                    <p>Smart indoor growing, fully automated. Designed and engineered in Ireland.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Product</h4>
+                    <ul>
+                        <li><a href="../index.html#how-it-works">How It Works</a></li>
+                        <li><a href="../index.html#features">Features</a></li>
+                        <li><a href="../index.html#specs">Tech Specs</a></li>
+                        <li><a href="../index.html#preorder">Pre-Order</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Learn</h4>
+                    <ul>
+                        <li><a href="../index.html#sustainability">Sustainability</a></li>
+                        <li><a href="../index.html#compare">Comparison</a></li>
+                        <li><a href="../index.html#use-cases">Use Cases</a></li>
+                        <li><a href="./">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Open Source</h4>
+                    <ul>
+                        <li><a href="../index.html#specs">Bill of Materials</a></li>
+                        <li><a href="../index.html#specs">Sensor Specs</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 GrowPod. All rights reserved. Designed in Ireland.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile nav toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            document.getElementById('navbar')
+                .classList.toggle('scrolled', window.scrollY > 10);
+        });
+
+        // Blog state
+        let posts = [];
+
+        // Load posts
+        async function loadPosts() {
+            try {
+                const res = await fetch('posts.json');
+                posts = await res.json();
+            } catch (e) {
+                posts = [];
+            }
+            renderListing();
+        }
+
+        // Render post listing
+        function renderListing() {
+            const grid = document.getElementById('blogGrid');
+            const empty = document.getElementById('blogEmpty');
+            const postView = document.getElementById('blogPostView');
+
+            postView.style.display = 'none';
+            grid.style.display = '';
+
+            if (posts.length === 0) {
+                grid.style.display = 'none';
+                empty.style.display = 'flex';
+                return;
+            }
+
+            empty.style.display = 'none';
+            grid.innerHTML = posts.map((post, i) => {
+                const excerpt = post.excerpt
+                    || stripHtml(post.content).substring(0, 150) + '...';
+                const date = formatDate(post.date);
+                const img = post.imageUrl
+                    ? `<div class="blog-card-image"><img src="${post.imageUrl}" alt="${post.title}" loading="lazy"></div>`
+                    : '';
+                return `
+                    <article class="blog-card" data-index="${i}">
+                        ${img}
+                        <div class="blog-card-body">
+                            <span class="blog-card-date">${date}</span>
+                            <h3 class="blog-card-title">${post.title}</h3>
+                            <p class="blog-card-excerpt">${excerpt}</p>
+                            <span class="blog-card-link">Read more &rarr;</span>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+
+            // Card click handlers
+            grid.querySelectorAll('.blog-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    showPost(parseInt(card.dataset.index));
+                });
+            });
+        }
+
+        // Show single post
+        function showPost(index) {
+            const post = posts[index];
+            if (!post) return;
+
+            const grid = document.getElementById('blogGrid');
+            const postView = document.getElementById('blogPostView');
+            const postFull = document.getElementById('blogPostFull');
+
+            grid.style.display = 'none';
+            postView.style.display = 'block';
+
+            const img = post.imageUrl
+                ? `<img class="blog-hero-image" src="${post.imageUrl}" alt="${post.title}">`
+                : '';
+
+            postFull.innerHTML = `
+                ${img}
+                <span class="blog-card-date">${formatDate(post.date)}</span>
+                <h1>${post.title}</h1>
+                <div class="blog-post-body">${post.content}</div>
+            `;
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Back button
+        document.getElementById('blogBackBtn').addEventListener('click', () => {
+            renderListing();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Handle browser back/forward with hash
+        window.addEventListener('hashchange', () => {
+            if (!location.hash.startsWith('#post-')) {
+                renderListing();
+            }
+        });
+
+        // Helpers
+        function stripHtml(html) {
+            const tmp = document.createElement('div');
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || '';
+        }
+
+        function formatDate(dateStr) {
+            try {
+                return new Date(dateStr).toLocaleDateString('en-IE', {
+                    year: 'numeric', month: 'long', day: 'numeric'
+                });
+            } catch {
+                return dateStr;
+            }
+        }
+
+        // Init
+        loadPosts();
+    </script>
+</body>
+</html>
