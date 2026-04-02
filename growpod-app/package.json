@@ -1,0 +1,19 @@
+{
+  "name": "growpod-app",
+  "version": "1.0.0",
+  "description": "GrowPod - Smart Microgreen Grow Chamber Controller",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "prettier": "^3.0.0"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.0",
+    "firebase": "^10.7.0"
+  }
+}

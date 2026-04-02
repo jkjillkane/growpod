@@ -2,7 +2,7 @@
    GrowPod - Main JavaScript
    ============================================ */
 
-document.addEventListener('DOMContentLoaded', () => {
+const init = () => {
 
     // --- Navbar scroll effect ---
     const navbar = document.getElementById('navbar');
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Scroll-triggered fade-in animations ---
     const fadeElements = document.querySelectorAll(
-        '.problem-card, .step, .feature-card, .use-case-card, .sus-point, .carbon-compare, .sensor-detail, .specs-table-wrapper'
+        '.problem-card, .step, .feature-card, .use-case-card, .sus-point, .carbon-compare, .sensor-detail, .specs-table-wrapper, .proof-item, .section-cta, .compare-takeaway, .preorder-card'
     );
 
     fadeElements.forEach(el => el.classList.add('fade-in'));
@@ -74,7 +74,13 @@ document.addEventListener('DOMContentLoaded', () => {
         barObserver.observe(barSection);
     }
 
-    // --- Pre-order form ---
+    // --- Pre-order form (sends to Fiach via FormSubmit.co) ---
+    const sanitize = (str) => {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    };
+
     const form = document.getElementById('preorderForm');
     if (form) {
         form.addEventListener('submit', (e) => {
@@ -82,18 +88,71 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
 
-            // Show success message
-            form.innerHTML = `
-                <div style="text-align: center; padding: 24px 0;">
-                    <div style="font-size: 3rem; margin-bottom: 12px;">&#127881;</div>
-                    <h3 style="margin-bottom: 8px;">You're on the list!</h3>
-                    <p style="color: var(--gray-500);">
-                        Thanks${data.name ? ', ' + data.name : ''}! We'll send updates to
-                        <strong>${data.email}</strong> as soon as pre-orders open.
-                    </p>
-                </div>
-            `;
+            const body = new FormData();
+            body.append('_subject', 'New GrowPod Waitlist Signup!');
+            body.append('_template', 'box');
+            body.append('_captcha', 'false');
+            body.append('Message',
+              "Hi handsome, looks like someone's interested in your grow pod!"
+            );
+            body.append('Name', data.name);
+            body.append('Email', data.email);
+            body.append('email', data.email);
+            body.append('Interested As', data.interest || 'Not specified');
+            body.append('_autoresponse',
+              'Thanks for joining the GrowPod waitlist! We\'ll notify you as soon as pre-orders open. Stay tuned!'
+            );
+
+            const recipient = ['Fiachkeenan', 'gmail.com'].join('@');
+            fetch('https://formsubmit.co/ajax/' + recipient, {
+                method: 'POST',
+                body: body,
+            })
+            .then(res => res.json())
+            .then(result => {
+                if (result.success) {
+                    const safeName = sanitize(data.name || '');
+                    const safeEmail = sanitize(data.email || '');
+                    form.innerHTML = `
+                        <div style="text-align: center; padding: 24px 0;">
+                            <div style="font-size: 3rem; margin-bottom: 12px;">&#127881;</div>
+                            <h3 style="margin-bottom: 8px;">You're on the list!</h3>
+                            <p style="color: var(--gray-500);">
+                                Thanks${safeName ? ', ' + safeName : ''}! We'll send updates to
+                                <strong>${safeEmail}</strong> as soon as pre-orders open.
+                            </p>
+                        </div>
+                    `;
+                } else {
+                    throw new Error('Submit failed');
+                }
+            })
+            .catch(() => {
+                submitBtn.textContent = 'Join the Waitlist';
+                submitBtn.disabled = false;
+                alert('Something went wrong. Please try again.');
+            });
+        });
+    }
+
+    // --- Obfuscated contact email ---
+    const contactLink = document.getElementById('contactEmail');
+    if (contactLink) {
+        const user = 'Fiachkeenan';
+        const domain = 'gmail.com';
+        contactLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = 'mailto:' + user + '@' + domain;
+        });
+        contactLink.addEventListener('mouseenter', () => {
+            contactLink.textContent = user + '@' + domain;
+        });
+        contactLink.addEventListener('mouseleave', () => {
+            contactLink.textContent = 'Get in touch';
         });
     }
 
@@ -118,6 +177,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // --- Sticky mobile CTA ---
+    const stickyCta = document.getElementById('stickyCta');
+    const preorderSection = document.getElementById('preorder');
+    if (stickyCta && preorderSection) {
+        window.addEventListener('scroll', () => {
+            const heroBottom = document.querySelector('.hero').getBoundingClientRect().bottom;
+            const preorderTop = preorderSection.getBoundingClientRect().top;
+            const show = heroBottom < 0 && preorderTop > window.innerHeight;
+            stickyCta.classList.toggle('visible', show);
+        });
+    }
+
+    // --- Back to top button ---
+    const backToTop = document.getElementById('backToTop');
+    if (backToTop) {
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('visible', window.scrollY > 600);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
     // --- Counter animation for hero stats ---
     const statValues = document.querySelectorAll('.stat-value');
     const heroObserver = new IntersectionObserver((entries) => {
@@ -139,4 +221,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const heroStats = document.querySelector('.hero-stats');
     if (heroStats) heroObserver.observe(heroStats);
-});
+};
+
+init();

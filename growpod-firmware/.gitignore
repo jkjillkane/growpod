@@ -1,0 +1,8 @@
+.pio/
+.vscode/
+lib/
+include/
+test/
+
+# Never commit credentials
+src/config.h

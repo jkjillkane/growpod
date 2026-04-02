@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2D6A4F">
+  <meta name="description" content="Monitor and control your Smart Microgreen Grow Chamber">
+  <title>GrowPod Controller</title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" type="image/png" href="/icons/icon-192.png">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/gauges.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="header-content">
+      <a href="#/dashboard" class="back-btn hidden" id="backBtn" aria-label="Back to dashboard">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </a>
+      <h1 class="app-title">GrowPod</h1>
+      <select class="device-select" id="deviceSelect" aria-label="Select grow box"></select>
+      <span class="connection-badge" id="connectionBadge">--</span>
+    </div>
+  </header>
+
+  <!-- Main content — views render here -->
+  <main id="app" class="app-main">
+    <div class="loading">
+      <div class="loading-spinner"></div>
+      <p>Connecting to chamber...</p>
+    </div>
+  </main>
+
+  <!-- Toast container for notifications -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Bottom tab navigation -->
+  <nav class="bottom-nav" id="bottomNav" aria-label="Main navigation">
+    <a href="#/dashboard" class="nav-tab active" data-view="dashboard">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="3" width="7" height="7" rx="1"/>
+        <rect x="14" y="3" width="7" height="7" rx="1"/>
+        <rect x="3" y="14" width="7" height="7" rx="1"/>
+        <rect x="14" y="14" width="7" height="7" rx="1"/>
+      </svg>
+      <span>Dashboard</span>
+    </a>
+    <a href="#/controls" class="nav-tab" data-view="controls">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+      </svg>
+      <span>Controls</span>
+    </a>
+    <a href="#/alerts" class="nav-tab" data-view="alerts">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+      </svg>
+      <span>Alerts</span>
+    </a>
+    <a href="#/history" class="nav-tab" data-view="history">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+      </svg>
+      <span>History</span>
+    </a>
+  </nav>
+
+  <script type="module" src="/js/app.js"></script>
+</body>
+</html>
