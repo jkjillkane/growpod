@@ -38,12 +38,23 @@ const init = () => {
         });
     });
 
-    // --- Scroll-triggered fade-in animations ---
+    // --- Scroll-triggered fade-in animations with stagger ---
     const fadeElements = document.querySelectorAll(
-        '.problem-card, .step, .feature-card, .use-case-card, .sus-point, .carbon-compare, .sensor-detail, .specs-table-wrapper, .proof-item, .section-cta, .compare-takeaway, .preorder-card'
+        '.problem-card, .step, .feature-card, .use-case-card, .sus-point, .carbon-compare, .sensor-detail, .specs-table-wrapper, .proof-item, .section-cta, .compare-takeaway, .preorder-card, .faq-item, .testimonial-card'
     );
 
     fadeElements.forEach(el => el.classList.add('fade-in'));
+
+    // Assign stagger indices within each parent container
+    const staggerGroups = new Map();
+    fadeElements.forEach(el => {
+        const parent = el.parentElement;
+        if (!staggerGroups.has(parent)) staggerGroups.set(parent, []);
+        staggerGroups.get(parent).push(el);
+    });
+    staggerGroups.forEach(group => {
+        group.forEach((el, i) => el.style.setProperty('--stagger-index', i));
+    });
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -172,7 +183,7 @@ const init = () => {
         navItems.forEach(item => {
             item.style.color = '';
             if (item.getAttribute('href') === '#' + current) {
-                item.style.color = 'var(--green-600)';
+                item.style.color = 'var(--green-500)';
             }
         });
     });
@@ -201,6 +212,41 @@ const init = () => {
     }
 
     // --- Counter animation for hero stats ---
+    const animateCounter = (el) => {
+        const text = el.textContent.trim();
+        // Handle range format like "7–14"
+        const rangeMatch = text.match(/^(\d+)\s*[\u2013\u2014-]\s*(\d+)$/);
+        if (rangeMatch) {
+            const t1 = parseInt(rangeMatch[1]);
+            const t2 = parseInt(rangeMatch[2]);
+            const duration = 1200;
+            const start = performance.now();
+            const step = (now) => {
+                const p = Math.min((now - start) / duration, 1);
+                const ease = 1 - Math.pow(1 - p, 3);
+                el.textContent = Math.round(t1 * ease) + '\u2013' + Math.round(t2 * ease);
+                if (p < 1) requestAnimationFrame(step);
+            };
+            requestAnimationFrame(step);
+            return;
+        }
+        // Handle "90%", "~12%", etc.
+        const match = text.match(/^([~]?)(\d+)(.*)$/);
+        if (!match) return;
+        const prefix = match[1];
+        const target = parseInt(match[2]);
+        const suffix = match[3];
+        const duration = 1500;
+        const start = performance.now();
+        const step = (now) => {
+            const p = Math.min((now - start) / duration, 1);
+            const ease = 1 - Math.pow(1 - p, 3);
+            el.textContent = prefix + Math.round(target * ease) + suffix;
+            if (p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+    };
+
     const statValues = document.querySelectorAll('.stat-value');
     const heroObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -212,6 +258,7 @@ const init = () => {
                     setTimeout(() => {
                         stat.style.opacity = '1';
                         stat.style.transform = 'translateY(0)';
+                        animateCounter(stat);
                     }, 200);
                 });
                 heroObserver.unobserve(entry.target);
@@ -221,6 +268,66 @@ const init = () => {
 
     const heroStats = document.querySelector('.hero-stats');
     if (heroStats) heroObserver.observe(heroStats);
+
+    // --- FAQ accordion ---
+    document.querySelectorAll('.faq-question').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const item = btn.closest('.faq-item');
+            const isOpen = item.classList.contains('open');
+            document.querySelectorAll('.faq-item.open').forEach(i => {
+                i.classList.remove('open');
+                i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+            });
+            if (!isOpen) {
+                item.classList.add('open');
+                btn.setAttribute('aria-expanded', 'true');
+            }
+        });
+    });
+
+    // --- Testimonial carousel ---
+    const track = document.getElementById('testimonialTrack');
+    const cards = track ? track.querySelectorAll('.testimonial-card') : [];
+    const dotsContainer = document.getElementById('testimonialDots');
+
+    if (track && cards.length > 0) {
+        let currentIndex = 0;
+        let autoInterval;
+
+        // Create dots
+        cards.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
+            dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
+            dot.addEventListener('click', () => goTo(i));
+            dotsContainer.appendChild(dot);
+        });
+
+        const dots = dotsContainer.querySelectorAll('.testimonial-dot');
+
+        const goTo = (index) => {
+            currentIndex = index;
+            track.style.transform = 'translateX(-' + (currentIndex * 100) + '%)';
+            dots.forEach((d, i) => d.classList.toggle('active', i === currentIndex));
+            resetAuto();
+        };
+
+        const resetAuto = () => {
+            clearInterval(autoInterval);
+            autoInterval = setInterval(() => {
+                goTo((currentIndex + 1) % cards.length);
+            }, 5000);
+        };
+
+        document.getElementById('testimonialNext')?.addEventListener('click', () => {
+            goTo((currentIndex + 1) % cards.length);
+        });
+        document.getElementById('testimonialPrev')?.addEventListener('click', () => {
+            goTo((currentIndex - 1 + cards.length) % cards.length);
+        });
+
+        resetAuto();
+    }
 };
 
 init();

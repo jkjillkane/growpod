@@ -4,8 +4,8 @@
   "description": "Monitor and control your Smart Microgreen Grow Chamber",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FAFAF5",
-  "theme_color": "#2D6A4F",
+  "background_color": "#EDEDEA",
+  "theme_color": "#1B4332",
   "orientation": "portrait",
   "icons": [
     {

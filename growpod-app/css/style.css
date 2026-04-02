@@ -11,23 +11,25 @@
 }
 
 :root {
-  /* --- New palette --- */
-  --primary: #2D6A4F;
-  --primary-light: #52B788;
+  /* --- New unified palette --- */
+  --primary: #1B4332;
+  --primary-light: #40916C;
   --primary-pale: #B7E4C7;
-  --surface: #F8F9F0;
-  --bg: #FAFAF5;
-  --text: #1A1A2E;
-  --text-muted: #6B7280;
+  --accent: #E8A838;
+  --accent-light: #FBE8B8;
+  --surface: #F5F5F2;
+  --bg: #EDEDEA;
+  --text: #141413;
+  --text-muted: #6B6B64;
   --warning: #F59E0B;
   --danger: #EF4444;
   --success: #6EE7B7;
 
-  /* Legacy aliases (existing code references these) */
-  --green-50: #ECFDF5;
-  --green-100: #D1FAE5;
-  --green-200: #B7E4C7;
-  --green-300: #95D5B2;
+  /* Legacy aliases */
+  --green-50: #D8F3DC;
+  --green-100: #B7E4C7;
+  --green-200: #95D5B2;
+  --green-300: #74C69D;
   --green-400: #52B788;
   --green-500: #40916C;
   --green-600: #2D6A4F;
@@ -35,30 +37,30 @@
   --green-800: #14532D;
   --green-900: #0B3D20;
 
-  --gray-50: #FAFAF5;
-  --gray-100: #F3F4F0;
-  --gray-200: #E5E7EB;
-  --gray-300: #D1D5DB;
-  --gray-400: #9CA3AF;
-  --gray-500: #6B7280;
-  --gray-600: #4B5563;
-  --gray-700: #374151;
-  --gray-800: #1F2937;
-  --gray-900: #1A1A2E;
+  --gray-50: #F5F5F2;
+  --gray-100: #EDEDEA;
+  --gray-200: #D6D6CE;
+  --gray-300: #B8B8B0;
+  --gray-400: #8F8F87;
+  --gray-500: #6B6B64;
+  --gray-600: #4A4A45;
+  --gray-700: #2D2D2A;
+  --gray-800: #1E1E1C;
+  --gray-900: #141413;
 
   --white: #ffffff;
   --radius: 16px;
   --radius-lg: 24px;
   --radius-sm: 10px;
-  --shadow: 0 2px 8px rgba(0,0,0,0.06);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
-  --shadow-lg: 0 8px 24px rgba(0,0,0,0.10);
+  --shadow: 0 2px 8px rgba(20,20,19,0.06);
+  --shadow-md: 0 4px 12px rgba(20,20,19,0.08);
+  --shadow-lg: 0 8px 24px rgba(20,20,19,0.10);
   --transition: 0.3s ease;
   --transition-fast: 0.15s ease;
 
-  /* Fonts */
-  --font-heading: 'Nunito', sans-serif;
-  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  /* Fonts — unified with website */
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
 
   /* App layout */
   --header-height: 56px;
@@ -581,8 +583,8 @@ body {
 }
 
 .crop-card.selected {
-  border-color: var(--primary);
-  background: var(--green-50);
+  border-color: var(--accent);
+  background: var(--accent-light);
 }
 
 .crop-card-icon {
@@ -682,9 +684,9 @@ body {
 }
 
 .duration-btn.selected {
-  border-color: var(--primary);
-  background: var(--green-50);
-  color: var(--primary);
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent-400, #D4930D);
 }
 
 /* --- Alert Items --- */
@@ -825,9 +827,9 @@ body {
 }
 
 .time-range-tab.active {
-  border-color: var(--primary);
-  background: var(--green-50);
-  color: var(--primary);
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent-400, #D4930D);
 }
 
 .chart-container {
